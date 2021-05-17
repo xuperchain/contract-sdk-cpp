@@ -8,3 +8,9 @@ build:
 
 test:
 	xdev test	
+
+build-image:
+	docker build -t hub.baidubce.com/xchain/emcc:latest -f scripts/emcc.Dockerfile .
+
+publish:
+	docker push hub.baidubce.com/xchain/emcc:latest
