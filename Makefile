@@ -12,9 +12,6 @@ test:
 build-image:
 	docker build -t hub.baidubce.com/xchain/emcc:latest -f scripts/emcc.Dockerfile .
 
-publish:
-	docker push hub.baidubce.com/xchain/emcc:latest
-
 checkout-pb:
 	git submodule init && git submodule update
 	ln -s ../xupercore/kernel/contract/bridge/pb/contract.proto pb/contract.proto
