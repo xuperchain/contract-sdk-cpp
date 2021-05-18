@@ -19,7 +19,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
     - name: Install Xdev
       run: |
-        go get github.com/xuperchain/xdev
+        go get github.com/chenfengjin/xdev emcc
       env:
         GO111MODULE: on
 
