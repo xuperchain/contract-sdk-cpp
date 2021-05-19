@@ -21,7 +21,7 @@ jobs:
       run: |
         go get -f github.com/xuperchain/xuperchain/core/cmd/xdev
       env:
-        GO111MODULE: on
+        GO11MODULE: on
 
     - name: Checkout code
       uses: actions/checkout@v2
