@@ -25,17 +25,17 @@ The C plus plus ontract SDK for  [![XuperChain](https://github.com/xuperchain/xu
    
    
 ### Examples
-You can use examples to getting start with XuperChain, explore XuperChain features.
+You can use examples to getting start with XuperChain, explore XuperChain features or in your DAPP 
    
 1. Build Examples
     
     ``` bash
-        make build-example 
+    make build-example 
     ```
 2. Run example test
   
     ``` bash
-        make example-test
+    make example-test
     ```
 3. Use in your DAPP 
 
@@ -50,6 +50,7 @@ You can use examples to getting start with XuperChain, explore XuperChain featur
 | [Score Record](chaincode) |An example of content deposit contract which store student grades on blockchain | |
 | [Short Content](interest_rate_swaps) | An example of content deposit, which implement store and query by  content field  | |
 | [Source Trace](fabcar) | An example contract of source trace |  |
+
 ### Contributions 
 
 We weleome contribution in any form(feature, issue, documention etc.), Visit [![Contribution Guide ](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html)](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html) for more information of contributing to XuperChain
