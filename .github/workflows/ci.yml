@@ -19,7 +19,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
     - name: Install Xdev
       run: |
-        go get -f github.com/xuperchain/xdev
+        go get -f github.com/xuperchain/xuperchain/core/cmd/xdev
       env:
         GO111MODULE: on
 
