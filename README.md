@@ -1,5 +1,5 @@
 # contract-sdk-cpp
-The C plus plus ontract SDK for  [![XuperChain](https://github.com/xuperchain/xuperchain.git)](https://github.com/xuperchain/xuperchain.git) smart contract
+The C plus plus contract SDK for  [![XuperChain](https://github.com/xuperchain/xuperchain.git)](https://github.com/xuperchain/xuperchain.git) smart contract
 ###  Dependencies 
 
  [![Docker ](https://docs.docker.com/engine/install/)](https://docs.docker.com/engine/install/)
@@ -35,22 +35,22 @@ You can use examples to getting start with XuperChain, explore XuperChain featur
 2. Run example test
   
     ``` bash
-    make example-test
+    make test-example
     ```
 3. Use in your DAPP 
 
 |  **Example** | **Description** | **Documentation** |
 | -------------|------------------------------|------------------|
-| [Award Manage](commercial-paper) | An digital award management contract example which can be used in Business operation activities | [Commercial paper tutorial](https://hyperledger-fabric.readthedocs.io/en/latest/tutorial/commercial_paper.html) |
-| [Charity Demo](off_chain_data) | A smart contract which store charity donate and cost on blockchain | [Peer channel-based event services](https://hyperledger-fabric.readthedocs.io/en/latest/peer_event_services.html) |
-| [Counter](token-erc-20) | An as simple as possible example of smart contract which implements a decentralized Counter| [README](token-erc-20/README.md) |
-| [Game Assets](token-utxo) | An assets management contract example set at game asset, you can extend it to any  NFT situation | [README](token-utxo/README.md) |
-| [Hash Deposit](high-throughput) | A file  deposit contract example,in which file hash is stored on blockchain | [README](high-throughput/README.md) |
-| [Luck Draw](auction) | A decentralized luck draw game  | [README](auction/README.md) |
+| [Award Manage](commercial-paper) | An digital award management contract example which can be used in Business operation activities | [DOC](https://hyperledger-fabric.readthedocs.io/en/latest/tutorial/commercial_paper.html) |
+| [Charity Demo](off_chain_data) | A smart contract which stores charity donate and cost on blockchain | [DOC](https://hyperledger-fabric.readthedocs.io/en/latest/peer_event_services.html) |
+| [Counter](token-erc-20) | An as simple as possible example of smart contract which implements a decentralized Counter| [DOC](token-erc-20/README.md) |
+| [Game Assets](token-utxo) | An assets management contract example set at game asset, you can extend it to any  NFT situation | [DOC](token-utxo/README.md) |
+| [Hash Deposit](high-throughput) | A file  deposit contract example,in which file hash is stored on blockchain | [DOC](high-throughput/README.md) |
+| [Luck Draw](auction) | A decentralized luck draw game  | [DOC](auction/README.md) |
 | [Score Record](chaincode) |An example of content deposit contract which store student grades on blockchain | |
 | [Short Content](interest_rate_swaps) | An example of content deposit, which implement store and query by  content field  | |
 | [Source Trace](fabcar) | An example contract of source trace |  |
 
 ### Contributions 
 
-We weleome contribution in any form(feature, issue, documention etc.), Visit [![Contribution Guide ](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html)](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html) for more information of contributing to XuperChain
+We weleome contribution in any form(feature, issue, documention etc.), See [![Contribution Guide ](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html)](https://xuper.baidu.com/n/xuperdoc/contribution/pull_requests.html) for more information of contributing to XuperChain
