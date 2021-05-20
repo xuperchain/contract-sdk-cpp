@@ -31,5 +31,4 @@ jobs:
           context: .
           push: true
           tags: hub.baidubce.com/xchain/emcc:1.0.0
-#          file:
 
