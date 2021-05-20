@@ -3,7 +3,7 @@ on:
   # but only for the main branch
   push:
     branches:
-      - emcc
+      - ci
 name: CI
 jobs:
   test:
@@ -17,15 +17,10 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: ${{ matrix.go-version }}
-    - name: Install Xdev
-      run: |
-        go get github.com/xuperchain/xuperchain/core/cmd/xdev
-      env:
-        GO111MODULE: on
 
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Test
       run: |
-        make build-image && make build && make test
+        make test && make build && make install
