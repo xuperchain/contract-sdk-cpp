@@ -2,9 +2,7 @@ FROM golang:1.13.1 AS builder
 WORKDIR /data/apps
 RUN apt update && apt install git
 RUN git clone https://github.com/xuperchain/xdev.git
-RUN cd xdev && git remote add me https://github.com/chenfengjin/xdev.git && git fetch me emcc && git checkout emcc
-RUN cd xdev && GOPROXY=goproxy.cn make
-# RUN cd xdev && make
+RUN cd xdev && make
 
 
 # ---
