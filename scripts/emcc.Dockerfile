@@ -17,4 +17,4 @@ WORKDIR /opt/xchain
 COPY --from=builder /data/apps/xdev/bin/xdev bin/xdev
 COPY . .
 
-RUN mkdir lib && bin/xdev build -o lib/libxchain.a --compiler host  --xdevRoot . -s "xchain" -s "xchain/trust_operators"
+RUN mkdir lib && bin/xdev build -o lib/libxchain.a --compiler host  --xdev-root . -s "xchain" -s "xchain/trust_operators"
