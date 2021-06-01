@@ -15,6 +15,7 @@ RUN cd protobuf-3.7.1 && emmake make install
 
 WORKDIR /opt/xchain
 COPY --from=builder /data/apps/xdev/bin/xdev bin/xdev
-COPY . .
+COPY src src
+COPY xdev.toml xdev.toml
 
 RUN mkdir lib && bin/xdev build -o lib/libxchain.a --compiler host  --xdev-root . -s "xchain" -s "xchain/trust_operators"
