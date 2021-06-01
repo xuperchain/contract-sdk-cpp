@@ -10,7 +10,7 @@ test:
 	xdev test	
 
 build-image:
-	docker build -t hub.baidubce.com/xchain/emcc:latest -f scripts/emcc.Dockerfile .
+	docker build -t hub.baidubce.com/xchain/emcc:dev -f scripts/emcc.Dockerfile .
 
 checkout-pb:
 	git submodule init && git submodule update

@@ -1,3 +1,13 @@
+FROM golang:1.13.1 AS builder
+WORKDIR /data/apps
+RUN apt update && apt install git
+RUN git clone https://github.com/xuperchain/xdev.git
+# RUN cd xdev && git remote add me https://github.com/chenfengjin/xdev.git && git fetch me emcc && git checkout emcc
+# RUN cd xdev && GOPROXY=goproxy.cn make
+RUN cd xdev && make
+
+
+# ---
 FROM hub.baidubce.com/xchain/emcc:latest
 RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
 RUN tar xf protobuf-cpp-3.7.1.tar.gz
@@ -6,11 +16,7 @@ RUN cd protobuf-3.7.1 && emmake make -j 4
 RUN cd protobuf-3.7.1 && emmake make install
 
 WORKDIR /opt/xchain
-
-RUN HTTPS_PROXY=agent.baidu.com:8118 curl -LO https://github.com/xuperchain/xdev/releases/latest/download/xdev-linux-amd64.tar.gz
-RUN tar xf xdev-linux-amd64.tar.gz
-
-
+COPY --from=builder /data/apps/xdev/bin/xdev bin/xdev
 COPY . .
 
-RUN bin/xdev build -o lib/libxchain.a --xdevRoot .
+RUN mkdir lib && bin/xdev build -o lib/libxchain.a --compiler host  --xdevRoot .
