@@ -1,13 +1,8 @@
 FROM golang:1.14 AS builder
 RUN apt-get update && apt-get install git
 
-# for arm
-
 RUN git clone https://github.com/xuperchain/xdev.git /data/apps/xdev
 WORKDIR /data/apps/xdev
-
-# for arm
-
 
 RUN make build
 
