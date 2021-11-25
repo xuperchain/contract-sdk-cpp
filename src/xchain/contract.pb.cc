@@ -10664,6 +10664,7 @@ const int Block::kProposerFieldNumber;
 const int Block::kSignFieldNumber;
 const int Block::kPubkeyFieldNumber;
 const int Block::kHeightFieldNumber;
+const int Block::kTimestampFieldNumber;
 const int Block::kTxidsFieldNumber;
 const int Block::kTxCountFieldNumber;
 const int Block::kInTrunkFieldNumber;
@@ -10864,6 +10865,13 @@ const char* Block::_InternalParse(const char* begin, const char* end, void* obje
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
+      // int64 timestamp = 10;
+      case 10: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 80) goto handle_unusual;
+        msg->set_timestamp(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
       // repeated string txids = 11;
       case 11: {
         if (static_cast<::google::protobuf::uint8>(tag) != 90) goto handle_unusual;
@@ -11033,6 +11041,19 @@ bool Block::MergePartialFromCodedStream(
         break;
       }
 
+      // int64 timestamp = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (80 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &timestamp_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // repeated string txids = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF)) {
@@ -11164,6 +11185,11 @@ void Block::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(9, this->height(), output);
   }
 
+  // int64 timestamp = 10;
+  if (this->timestamp() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(10, this->timestamp(), output);
+  }
+
   // repeated string txids = 11;
   for (int i = 0, n = this->txids_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -11266,6 +11292,13 @@ size_t Block::ByteSizeLong() const {
         this->height());
   }
 
+  // int64 timestamp = 10;
+  if (this->timestamp() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->timestamp());
+  }
+
   // int32 tx_count = 12;
   if (this->tx_count() != 0) {
     total_size += 1 +
@@ -11323,6 +11356,9 @@ void Block::MergeFrom(const Block& from) {
   if (from.height() != 0) {
     set_height(from.height());
   }
+  if (from.timestamp() != 0) {
+    set_timestamp(from.timestamp());
+  }
   if (from.tx_count() != 0) {
     set_tx_count(from.tx_count());
   }
@@ -11363,6 +11399,7 @@ void Block::InternalSwap(Block* other) {
   next_hash_.Swap(&other->next_hash_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(height_, other->height_);
+  swap(timestamp_, other->timestamp_);
   swap(tx_count_, other->tx_count_);
   swap(in_trunk_, other->in_trunk_);
 }

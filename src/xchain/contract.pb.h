@@ -4601,6 +4601,12 @@ class Block :
   ::google::protobuf::int64 height() const;
   void set_height(::google::protobuf::int64 value);
 
+  // int64 timestamp = 10;
+  void clear_timestamp();
+  static const int kTimestampFieldNumber = 10;
+  ::google::protobuf::int64 timestamp() const;
+  void set_timestamp(::google::protobuf::int64 value);
+
   // int32 tx_count = 12;
   void clear_tx_count();
   static const int kTxCountFieldNumber = 12;
@@ -4626,6 +4632,7 @@ class Block :
   ::google::protobuf::internal::ArenaStringPtr pubkey_;
   ::google::protobuf::internal::ArenaStringPtr next_hash_;
   ::google::protobuf::int64 height_;
+  ::google::protobuf::int64 timestamp_;
   ::google::protobuf::int32 tx_count_;
   bool in_trunk_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -8819,6 +8826,20 @@ inline void Block::set_height(::google::protobuf::int64 value) {
   
   height_ = value;
   // @@protoc_insertion_point(field_set:xchain.contract.sdk.Block.height)
+}
+
+// int64 timestamp = 10;
+inline void Block::clear_timestamp() {
+  timestamp_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Block::timestamp() const {
+  // @@protoc_insertion_point(field_get:xchain.contract.sdk.Block.timestamp)
+  return timestamp_;
+}
+inline void Block::set_timestamp(::google::protobuf::int64 value) {
+  
+  timestamp_ = value;
+  // @@protoc_insertion_point(field_set:xchain.contract.sdk.Block.timestamp)
 }
 
 // repeated string txids = 11;
