@@ -1856,6 +1856,7 @@ const int CallArgs::kArgsFieldNumber;
 const int CallArgs::kInitiatorFieldNumber;
 const int CallArgs::kAuthRequireFieldNumber;
 const int CallArgs::kTransferAmountFieldNumber;
+const int CallArgs::kCallerFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CallArgs::CallArgs()
@@ -1881,6 +1882,10 @@ CallArgs::CallArgs(const CallArgs& from)
   if (from.transfer_amount().size() > 0) {
     transfer_amount_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.transfer_amount_);
   }
+  caller_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.caller().size() > 0) {
+    caller_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.caller_);
+  }
   // @@protoc_insertion_point(copy_constructor:xchain.contract.sdk.CallArgs)
 }
 
@@ -1890,6 +1895,7 @@ void CallArgs::SharedCtor() {
   method_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   initiator_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   transfer_amount_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  caller_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 CallArgs::~CallArgs() {
@@ -1901,6 +1907,7 @@ void CallArgs::SharedDtor() {
   method_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   initiator_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   transfer_amount_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  caller_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void CallArgs::SetCachedSize(int size) const {
@@ -1923,6 +1930,7 @@ void CallArgs::Clear() {
   method_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   initiator_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   transfer_amount_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  caller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -2013,6 +2021,22 @@ const char* CallArgs::_InternalParse(const char* begin, const char* end, void* o
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
         object = msg->mutable_transfer_amount();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string caller = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_caller();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -2134,6 +2158,21 @@ bool CallArgs::MergePartialFromCodedStream(
         break;
       }
 
+      // string caller = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_caller()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->caller().data(), static_cast<int>(this->caller().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "xchain.contract.sdk.CallArgs.caller"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2210,6 +2249,16 @@ void CallArgs::SerializeWithCachedSizes(
       5, this->transfer_amount(), output);
   }
 
+  // string caller = 6;
+  if (this->caller().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->caller().data(), static_cast<int>(this->caller().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "xchain.contract.sdk.CallArgs.caller");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->caller(), output);
+  }
+
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
   // @@protoc_insertion_point(serialize_end:xchain.contract.sdk.CallArgs)
@@ -2265,6 +2314,13 @@ size_t CallArgs::ByteSizeLong() const {
         this->transfer_amount());
   }
 
+  // string caller = 6;
+  if (this->caller().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->caller());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -2296,6 +2352,10 @@ void CallArgs::MergeFrom(const CallArgs& from) {
 
     transfer_amount_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.transfer_amount_);
   }
+  if (from.caller().size() > 0) {
+
+    caller_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.caller_);
+  }
 }
 
 void CallArgs::CopyFrom(const CallArgs& from) {
@@ -2323,6 +2383,8 @@ void CallArgs::InternalSwap(CallArgs* other) {
   initiator_.Swap(&other->initiator_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   transfer_amount_.Swap(&other->transfer_amount_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  caller_.Swap(&other->caller_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
 }
 
