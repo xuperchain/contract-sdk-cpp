@@ -1,5 +1,6 @@
-#include "xchain/contract.pb.h"
 #include "xchain/block.h"
+
+#include "xchain/contract.pb.h"
 
 namespace pb = xchain::contract::sdk;
 
@@ -19,6 +20,7 @@ void Block::init(const pb::Block& pbblock) {
     tx_count = pbblock.tx_count();
     in_trunk = pbblock.in_trunk();
     next_hash = pbblock.next_hash();
+    timestamp = pbblock.timestamp();
 
     for (int i = 0; i < pbblock.txids_size(); i++) {
         txids.emplace_back(pbblock.txids(i));
@@ -26,4 +28,3 @@ void Block::init(const pb::Block& pbblock) {
 }
 
 }  // namespace xchain
-

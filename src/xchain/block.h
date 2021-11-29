@@ -4,8 +4,10 @@
 namespace xchain {
 namespace contract {
 namespace sdk {
-    class Block;
-}}}
+class Block;
+}
+}  // namespace contract
+}  // namespace xchain
 
 namespace xchain {
 
@@ -26,6 +28,7 @@ public:
     int32_t tx_count;
     bool in_trunk;
     std::string next_hash;
+    int64_t timestamp;
 };
 }  // namespace xchain
 
