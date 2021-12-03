@@ -86,3 +86,31 @@ DEFINE_METHOD(Features, json_literal) {
     };
     ctx->ok(j.dump());
 }
+
+DEFINE_METHOD(Features, emit_event) {
+    xchain::Context* ctx = self.context();
+    const std::string body = "body";
+    ctx->emit_event("call", body);
+}
+
+DEFINE_METHOD(Features, query_tx) {
+    xchain::Context* ctx = self.context();
+    const std::string tx_id = ctx->arg("tx_id");
+    xchain::Transaction tx;
+    ctx->query_tx(tx_id, &tx);
+    ctx->ok(tx.blockid);
+}
+
+DEFINE_METHOD(Features, query_block) {
+    xchain::Context* ctx = self.context();
+    const std::string block_id = ctx->arg("block_id");
+    xchain::Block block;
+    ctx->query_block(block_id, &block);
+    ctx->ok(block.pre_hash);
+}
+
+DEFINE_METHOD(Features, transfer) {
+    xchain::Context* ctx = self.context();
+    xchain::Account sender = xchain::Account("XC2222222222222222@xuper");
+    sender.transfer("20");
+}
