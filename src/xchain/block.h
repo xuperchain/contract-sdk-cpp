@@ -1,7 +1,9 @@
 #ifndef XCHAIN_BLOCK_H
 #define XCHAIN_BLOCK_H
+
 #include <string>
 #include <vector>
+
 namespace xchain {
 namespace contract {
 namespace sdk {
