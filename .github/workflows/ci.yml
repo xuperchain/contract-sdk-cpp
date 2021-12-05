@@ -15,10 +15,10 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Install XDEV
         run: |
-          git clone https://github.com/xuperchain/xdev.git &&
-          cd xdev &&
-          make build &&
-          echo `pwd`/bin >> $GITHUB_PATH &&
+          git clone https://github.com/xuperchain/xdev.git 
+          cd xdev 
+          make build 
+          echo `pwd`/bin >> $GITHUB_PATH 
 
       - name: setup Docker
         if: "contains( ${{ matrix.platform }}, 'ubuntu')"
