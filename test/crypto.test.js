@@ -7,7 +7,8 @@ function deploy() {
         name: "crypto",
         code: codePath,
         lang: "c",
-        init_args: {}
+        init_args: {},
+        options: { "account": "XC1111111111111111@xuper" }
     });
 }
 

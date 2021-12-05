@@ -8,7 +8,8 @@ function deploy() {
         code: codePath,
         lang: "c",
         init_args: {},
-        type: "wasm"
+        type: "wasm",
+        options: { "account": "XC1111111111111111@xuper" }
     });
 }
 
@@ -90,21 +91,23 @@ Test("call", function (t) {
 
     t.Run("ok", function (tt) {
         c1 = xchain.Deploy({
-            name: "c1",
+            name: "contract1",
             code: codePath,
             lang: "c",
-            init_args: {}
+            init_args: {},
+            options: { "account": "XC1111111111111111@xuper" }
         });
         c1.Invoke("put", { "k1": "v1" })
 
         c2 = xchain.Deploy({
-            name: "c2",
+            name: "contract2",
             code: codePath,
             lang: "c",
-            init_args: {}
+            init_args: {},
+            options: { "account": "XC1111111111111111@xuper" }
         });
         resp = c2.Invoke("call", {
-            "contract": "c1",
+            "contract": "contract1",
             "method": "get",
             "key": "k1",
         })

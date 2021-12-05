@@ -172,7 +172,8 @@ function deployRelay() {
     name: "relayer",
     code: relayCodePath,
     lang: "c",
-    init_args: {}
+    init_args: {},
+    options: { "account": "XC1111111111111111@xuper" }
   });
 }
 
@@ -181,7 +182,8 @@ function deployCross() {
     name: "cross_chain",
     code: crossCodePath,
     lang: "c",
-    init_args: {}
+    init_args: {},
+    options: { "account": "XC1111111111111111@xuper" }
   });
 }
 
