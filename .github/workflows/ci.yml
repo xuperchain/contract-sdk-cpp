@@ -13,16 +13,6 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go-version }}
-      
-      - name: Install XDEV
-        run: |
-          git clone https://github.com/xuperchain/xdev.git 
-          cd xdev 
-          make build 
-          make install
-          echo `pwd`/bin >> $GITHUB_PATH 
-          pwd
-          ls bin
 
       - name: setup Docker
         if: "contains( ${{ matrix.platform }}, 'ubuntu')"
@@ -33,6 +23,13 @@ jobs:
 
       - name: Test
         run: |
+          git clone https://github.com/xuperchain/xdev.git 
+          cd xdev 
+          make build 
+          make install
+          echo `pwd`/bin >> $GITHUB_PATH 
+          pwd
+          ls bin
           cat $GITHUB_PATH 
           echo $PATH 
           ls /home/runner/work/contract-sdk-cpp/contract-sdk-cpp/xdev/bin
