@@ -30,5 +30,6 @@ jobs:
 
       - name: Test
         run: |
-          echo $GITHUB_PATH 
+          cat $GITHUB_PATH 
+          echo $PATH 
           make test && make coverage
