@@ -25,4 +25,4 @@ jobs:
           git clone https://github.com/xuperchain/xdev.git 
           cd xdev && make build  && cd ..
           export PATH=`pwd`/xdev/bin:${PATH}
-          make test
+          make build && make test
