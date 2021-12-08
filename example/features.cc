@@ -16,10 +16,18 @@ DEFINE_METHOD(Features, logging) {
 
 DEFINE_METHOD(Features, put) {
     xchain::Context* ctx = self.context();
-    for (const auto& elem : ctx->args()) {
-        ctx->put_object(elem.first, elem.second);
+    const std::string& key = ctx->arg("key");
+    if (key.empty()) {
+        ctx->error("missing key");
+        return;
     }
-    ctx->ok("ok");
+    const std::string &value = ctx->arg("value");
+    if (value.empty()) {
+        ctx->error("missing value");
+        return;
+    }
+    ctx->put_object(key, value);
+    ctx->ok(value);
 }
 
 DEFINE_METHOD(Features, get) {
