@@ -21,7 +21,7 @@ DEFINE_METHOD(Features, put) {
         ctx->error("missing key");
         return;
     }
-    const std::string &value = ctx->arg("value");
+    const std::string& value = ctx->arg("value");
     if (value.empty()) {
         ctx->error("missing value");
         return;
@@ -119,6 +119,22 @@ DEFINE_METHOD(Features, query_block) {
 
 DEFINE_METHOD(Features, transfer) {
     xchain::Context* ctx = self.context();
-    xchain::Account sender = xchain::Account("XC2222222222222222@xuper");
-    sender.transfer("20");
+    auto to = ctx->arg("to");
+    if (to.empty()) {
+        ctx->error("missing to");
+        return;
+    }
+
+    auto amount = ctx->arg("amount");
+    if (amount.empty()) {
+        ctx->error("missing amount");
+        return;
+    }
+
+    xchain::Account sender = xchain::Account(to);
+    if (!sender.transfer(amount)) {
+        ctx->error("transfer failed");
+        return;
+    }
+    ctx->ok("ok");
 }
