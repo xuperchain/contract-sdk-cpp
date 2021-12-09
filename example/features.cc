@@ -44,7 +44,15 @@ DEFINE_METHOD(Features, get) {
 DEFINE_METHOD(Features, iterator) {
     xchain::Context* ctx = self.context();
     const std::string& start = ctx->arg("start");
+    if (start.empty()) {
+        ctx->error("missing start");
+        return;
+    }
     const std::string& limit = ctx->arg("limit");
+    if (limit.empty()) {
+        ctx->error("missing limit");
+        return;
+    }
     std::string ret;
     auto iter = ctx->new_iterator(start, limit);
     xchain::ElemType elem;
