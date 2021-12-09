@@ -10,7 +10,7 @@ function deploy(totalSupply) {
         lang: lang,
         type: type,
         init_args: { "admin": "xchain" },
-        options: { "account": "xchain" }
+        options: { "account": "XC1111111111111111@xuper" }
     });
 }
 
