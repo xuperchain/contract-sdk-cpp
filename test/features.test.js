@@ -42,7 +42,7 @@ Test("deploy", function (t) {
 
 Test("put", function (t) {
     var c = deploy();
-    c.Invoke("put", { "k1": "v1" });
+    c.Invoke("put", { "key": "k1", "value": "v1" });
     resp = c.Invoke("get", { "key": "k1" });
     assert.equal(resp.Body, "v1");
 })
@@ -55,7 +55,7 @@ Test("get", function (t) {
     })
 
     t.Run("ok", function (tt) {
-        c.Invoke("put", { "k1": "v1" });
+        c.Invoke("put", { "key": "k1", "value": "v1" });
         resp = c.Invoke("get", { "key": "k1" });
         assert.equal(resp.Body, "v1");
     })
@@ -70,7 +70,10 @@ Test("iterator", function (t) {
     })
 
     t.Run("ok", function (tt) {
-        c.Invoke("put", { "t_k1": "v1", "t_k2": "v2", "t_k3": "v3" });
+        c.Invoke("put", { "key": "t_k1", "value": "v1", });
+        c.Invoke("put", { "key": "t_k2", "value": "v2", });
+        c.Invoke("put", { "key": "t_k3", "value": "v3", });
+
         resp = c.Invoke("iterator", { "start": "t_", "limit": "t_\xff" })
         assert.equal(resp.Status, 200);
         assert.equal(resp.Body, "t_k1:v1, t_k2:v2, t_k3:v3, ");
@@ -97,7 +100,7 @@ Test("call", function (t) {
             init_args: {},
             options: { "account": "XC1111111111111111@xuper" }
         });
-        c1.Invoke("put", { "k1": "v1" })
+        c1.Invoke("put", { "key": "k1", "value": "v1" })
 
         c2 = xchain.Deploy({
             name: "contract2",
