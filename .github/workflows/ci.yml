@@ -25,4 +25,5 @@ jobs:
           git clone https://github.com/xuperchain/xdev.git 
           cd xdev && make build  && cd ..
           export PATH=`pwd`/xdev/bin:${PATH}
+          export XDEV_CC_IMAGE=xuper/emcc:dev 
           make build && make test
