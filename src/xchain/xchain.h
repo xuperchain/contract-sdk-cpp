@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+
 #include "xchain/account.h"
 #include "xchain/basic_iterator.h"
 #include "xchain/block.h"
@@ -26,6 +27,8 @@ public:
     virtual const std::map<std::string, std::string>& args() const = 0;
     virtual const std::string& arg(const std::string& name) const = 0;
     virtual const std::string& initiator() const = 0;
+    virtual const std::string& caller() const = 0;
+
     virtual int auth_require_size() const = 0;
     virtual const std::string& auth_require(int idx) const = 0;
     virtual bool get_object(const std::string& key, std::string* value) = 0;
@@ -45,11 +48,12 @@ public:
                       const std::string& method,
                       const std::map<std::string, std::string>& args,
                       Response* response) = 0;
-    virtual bool cross_query(const std::string& uri, 
-                        const std::map<std::string, std::string>& args,
-                        Response* response) = 0;                  
+    virtual bool cross_query(const std::string& uri,
+                             const std::map<std::string, std::string>& args,
+                             Response* response) = 0;
     virtual void logf(const char* fmt, ...) = 0;
-    virtual bool emit_event(const std::string& name, const std::string& body) = 0;
+    virtual bool emit_event(const std::string& name,
+                            const std::string& body) = 0;
 };
 
 class Contract {
