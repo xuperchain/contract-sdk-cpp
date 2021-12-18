@@ -34,6 +34,7 @@ ENV EM_CACHE=/data/apps/emcc/emsdk/emscripten/1.38.30/cache
 ENV EMSCRIPTEN=/data/apps/emcc/emsdk/emscripten/1.38.30
 ENV BINARYEN_ROOT=/data/apps/emcc/emsdk/binaryen/tag-1.38.30_64bit_binaryen
 
+
 # 安装 protobuf
 RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
 RUN tar xvf protobuf-cpp-3.7.1.tar.gz
@@ -47,3 +48,9 @@ COPY src src
 COPY xdev.toml xdev.toml
 
 RUN mkdir lib && XEDV_ROOT=`pwd` bin/xdev build -o lib/libxchain.a --compiler host --using-precompiled-sdk=false -s "xchain" -s "xchain/trust_operators"
+
+
+COPY example example
+RUN  bin/xdev build -o example/counter.wasm  --compiler host example/counter.cc
+
+RUN chmod 777 -R /data/apps/emcc/emsdk/emscripten/1.38.30/
