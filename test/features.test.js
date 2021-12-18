@@ -143,3 +143,29 @@ Test("json", function (t) {
         assert.deepStrictEqual(value, JSON.parse(resp.Body))
     })
 })
+
+Test("caller", function (t) {
+    var features1 = xchain.Deploy({
+        name: "features1",
+        code: codePath,
+        lang: "c",
+        init_args: {},
+        type: "wasm",
+        options: { "account": "XC1111111111111111@xuper" }
+    })
+    var features2 = xchain.Deploy({
+        name: "features2",
+        code: codePath,
+        lang: "c",
+        init_args: {},
+        type: "wasm",
+        options: { "account": "XC1111111111111111@xuper" }
+    })
+    resp = features1.Invoke("call", {
+        "contract": "features2",
+        "method": "direct_caller"
+    })
+    assert.equal(resp.Body, "features1")
+}
+)
+

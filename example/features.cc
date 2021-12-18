@@ -146,3 +146,9 @@ DEFINE_METHOD(Features, transfer) {
     }
     ctx->ok("ok");
 }
+
+DEFINE_METHOD(Features, direct_caller) {
+    auto ctx = self.context();
+    ctx->ok(ctx->caller());
+    return;
+}
