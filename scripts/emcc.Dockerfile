@@ -32,7 +32,7 @@ RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.
 RUN tar xvf protobuf-cpp-3.7.1.tar.gz
 
 WORKDIR /data/apps/emsdk/protobuf-3.7.1/cmake/
-COPY CMakeLists.txt_pb CMakeLists.txt
+#COPY CMakeLists.txt_pb CMakeLists.txt
 RUN mkdir build && cd build &&  emcmake cmake  -D protobuf_BUILD_PROTOC_BINARIES=0 -D protobuf_BUILD_TESTS=0 -D protobuf_BUILD_EXAMPLES=0 ..  && emcmake make  -j 8  
 RUN cd build&& emcmake make install 
 
