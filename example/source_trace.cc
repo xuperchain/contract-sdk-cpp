@@ -93,7 +93,7 @@ public:
         std::string goodsRecordsKey = GOODSRECORD + id + "_0";
         std::string goodsRecordsTopKey = GOODSRECORDTOP + id;
         ctx->put_object(goodsRecordsKey, CREATE);
-        ctx->put_object(goodsRecordsTopKey, 0);
+        ctx->put_object(goodsRecordsTopKey, "0");
         ctx->ok(id);
     }
 
