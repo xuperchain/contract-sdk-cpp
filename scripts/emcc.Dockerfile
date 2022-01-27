@@ -19,8 +19,8 @@ RUN apt install -y python3 wget cmake  clang curl git python
 WORKDIR /data/apps
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR /data/apps/emsdk
-RUN ./emsdk install 2.0.30
-RUN ./emsdk activate 2.0.30
+RUN ./emsdk install 2.0.34
+RUN ./emsdk activate 2.0.34
 
 ENV EMSDK=/data/apps/emsdk
 ENV EM_CONFIG=/data/apps/emsdk/.emscripten
