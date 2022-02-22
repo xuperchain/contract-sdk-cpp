@@ -153,6 +153,8 @@ RUN tar xvf protobuf-cpp-3.7.1.tar.gz
 WORKDIR /src/protobuf-3.7.1/cmake/
 RUN mkdir build && cd build &&  emcmake cmake  -D protobuf_BUILD_PROTOC_BINARIES=0 -D protobuf_BUILD_TESTS=0 -D protobuf_BUILD_EXAMPLES=0 ..  && emmake make  -j 8  
 RUN cd build&& emmake make install 
+RUN rm -rf /src/protobuf-3.7.1
+RUN rm -rf /src/protobuf-cpp-3.7.1.tar.gz
 
 # # build embeded library
 WORKDIR /opt/xchain
@@ -161,7 +163,7 @@ COPY src src
 COPY xdev.toml xdev.toml
 
 RUN mkdir lib && XEDV_ROOT=`pwd` bin/xdev build -o lib/libxchain.a --compiler host --using-precompiled-sdk=false -s "xchain" -s "xchain/trust_operators"
-
+RUN rm -rf src xdev.toml 
 
 # COPY example example
 # RUN  bin/xdev build -o example/counter.wasm  --compiler host example/counter.cc
