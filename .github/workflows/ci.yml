@@ -16,6 +16,7 @@ jobs:
 
       - name: setup Docker
         uses: docker-practice/actions-setup-docker@master
+        if: "contains( ${{ matrix.platform }}, 'ubuntu')"
 
       - name: Checkout code
         uses: actions/checkout@v2
