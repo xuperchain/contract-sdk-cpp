@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install git
 ARG XDEV_COMMIT_HASH=1262bba3d47ac22a461f907b614eba654d171216
 
 RUN git clone https://github.com/xuperchain/xdev.git /data/apps/xdev && \
-    cd  /data/apps/xdev && git checkout XDEV_COMMIT_HASH && make build
+    cd  /data/apps/xdev && git checkout ${XDEV_COMMIT_HASH} && make build
 
 # ---
 FROM ubuntu:focal AS stage_build
@@ -28,11 +28,11 @@ RUN echo "## Start building" \
 
 # Copy the contents of this repository to the container
 # COPY . ${EMSDK}
-RUN HTTPS_PROXY=${PROXY} git clone https://github.com/emscripten-core/emsdk.git 
+RUN git clone https://github.com/emscripten-core/emsdk.git 
 
 RUN echo "## Install Emscripten" \
     && cd ${EMSDK} \
-    && HTTPS_PROXY=${PROXY} ./emsdk install ${EMSCRIPTEN_VERSION} \
+    && ./emsdk install ${EMSCRIPTEN_VERSION} \
     && echo "## Done"
 
 # This generates configuration that contains all valid paths according to installed SDK
@@ -143,7 +143,7 @@ LABEL maintainer="1871653365@qq.com" \
 # ------------------------------------------------------------------------------
 
 # 安装 protobuf
-RUN HTTPS_PROXY=${PROXY} curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
+RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
 RUN tar xvf protobuf-cpp-3.7.1.tar.gz
 
 WORKDIR /src/protobuf-3.7.1/cmake/
