@@ -20,6 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build Image
+        run: |
+          make build-image
+
       - name: Test
         run: |
           git clone https://github.com/xuperchain/xdev.git 

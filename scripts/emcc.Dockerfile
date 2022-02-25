@@ -1,21 +1,17 @@
 FROM golang:1.14 AS builder
 RUN apt-get update && apt-get install git
+ARG XDEV_COMMIT_HASH=1262bba3d47ac22a461f907b614eba654d171216
 
-# TODO fix it 
-RUN HTTPS_PROXY=agent.baidu.com:8118 git clone https://github.com/chenfengjin/xdev.git -b emsdk-latest /data/apps/xdev
-WORKDIR /data/apps/xdev
-RUN HTTPS_PROXY=agent.baidu.com:8118 git pull && GO111MODULE=on GOPROXY=goproxy.cn  make build
+RUN git clone https://github.com/xuperchain/xdev.git /data/apps/xdev && \
+    cd  /data/apps/xdev && git checkout XDEV_COMMIT_HASH && make build
 
 # ---
 FROM ubuntu:focal AS stage_build
-ARG EMSCRIPTEN_VERSION=tot
+ARG EMSCRIPTEN_VERSION=2.0.34
 ENV EMSDK /emsdk
-
 # ------------------------------------------------------------------------------
-ENV GOPROXY  https://goproxy.cn  
-SHELL ["/bin/bash", "-c"]
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
-RUN sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+# RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+# RUN sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN apt update 
 RUN echo "## Start building" \
     && echo "## Update and install packages" \
@@ -31,12 +27,12 @@ RUN echo "## Start building" \
     && echo "## Done"
 
 # Copy the contents of this repository to the container
-RUN HTTPS_PROXY=agent.baidu.com:8118 git clone https://github.com/emscripten-core/emsdk.git 
 # COPY . ${EMSDK}
+RUN HTTPS_PROXY=${PROXY} git clone https://github.com/emscripten-core/emsdk.git 
 
 RUN echo "## Install Emscripten" \
     && cd ${EMSDK} \
-    && ./emsdk install ${EMSCRIPTEN_VERSION} \
+    && HTTPS_PROXY=${PROXY} ./emsdk install ${EMSCRIPTEN_VERSION} \
     && echo "## Done"
 
 # This generates configuration that contains all valid paths according to installed SDK
@@ -97,7 +93,7 @@ RUN echo "## Create emscripten user (1000:1000)" \
     && echo "## Done"
 
 # ------------------------------------------------------------------------------
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list &&  sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+# RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list &&  sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN echo "## Update and install packages" \
     && apt-get -qq -y update \
     # Somewhere in here apt sets up tzdata which asks for your time zone and blocks
@@ -137,21 +133,22 @@ RUN echo "## Update and install packages" \
 # Use commonly used /src as working directory
 WORKDIR /src
 
-LABEL maintainer="kontakt@trzeci.eu" \
-    org.label-schema.name="emscripten" \
-    org.label-schema.description="The official container with Emscripten SDK" \
-    org.label-schema.url="https://emscripten.org" \
-    org.label-schema.vcs-url="https://github.com/emscripten-core/emsdk" \
+LABEL maintainer="1871653365@qq.com" \
+    org.label-schema.name="chenfengjin" \
+    org.label-schema.description="The official container of XuperChain contract sdk" \
+    org.label-schema.url="xuper.baidu.com" \
+    org.label-schema.vcs-url="https://github.com/xuperchain/contract-sdk-cpp" \
     org.label-schema.docker.dockerfile="/docker/Dockerfile"
 
 # ------------------------------------------------------------------------------
 
 # 安装 protobuf
-RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
+RUN HTTPS_PROXY=${PROXY} curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protobuf-cpp-3.7.1.tar.gz
 RUN tar xvf protobuf-cpp-3.7.1.tar.gz
 
 WORKDIR /src/protobuf-3.7.1/cmake/
-RUN mkdir build && cd build &&  emcmake cmake  -D protobuf_BUILD_PROTOC_BINARIES=0 -D protobuf_BUILD_TESTS=0 -D protobuf_BUILD_EXAMPLES=0 ..  && emmake make  -j 8  
+RUN mkdir build && cd build &&  emcmake cmake  -D protobuf_BUILD_PROTOC_BINARIES=0 \
+    -D protobuf_BUILD_TESTS=0 -D protobuf_BUILD_EXAMPLES=0 ..  && emmake make  -j 8  
 RUN cd build&& emmake make install 
 RUN rm -rf /src/protobuf-3.7.1
 RUN rm -rf /src/protobuf-cpp-3.7.1.tar.gz
@@ -163,7 +160,3 @@ COPY src src
 COPY xdev.toml xdev.toml
 
 RUN mkdir lib && XEDV_ROOT=`pwd` bin/xdev build -o lib/libxchain.a --compiler host --using-precompiled-sdk=false -s "xchain" -s "xchain/trust_operators"
-RUN rm -rf src xdev.toml 
-
-# COPY example example
-# RUN  bin/xdev build -o example/counter.wasm  --compiler host example/counter.cc
