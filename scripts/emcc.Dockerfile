@@ -1,7 +1,8 @@
 FROM golang:1.14 AS builder
 RUN apt-get update && apt-get install git
 ARG XDEV_COMMIT_HASH=5d4e404afbe8be9b8b63149255561206ea0bfbd9
-
+ARG GOPROXY
+ARG GO111MODULE
 RUN git clone https://github.com/xuperchain/xdev.git /data/apps/xdev && \
     cd  /data/apps/xdev && git checkout ${XDEV_COMMIT_HASH} && make build
 
