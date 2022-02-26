@@ -40,6 +40,3 @@ DEFINE_METHOD(Counter, get) {
         ctx->error("key not found");
     }
 }
-int main(){
-    
-}
