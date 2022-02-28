@@ -16,14 +16,19 @@ jobs:
 
       - name: setup Docker
         uses: docker-practice/actions-setup-docker@master
+        if: "contains( ${{ matrix.platform }}, 'ubuntu')"
 
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build Image
+        run: |
+          make build-image
+
       - name: Test
         run: |
           git clone https://github.com/xuperchain/xdev.git 
-          cd xdev && make build  && cd ..
+          cd xdev && git checkout 5d4e404afbe8be9b8b63149255561206ea0bfbd9 && make build  && cd ..
           export PATH=`pwd`/xdev/bin:${PATH}
           export XDEV_CC_IMAGE=xuper/emcc:dev 
           make build && make test
