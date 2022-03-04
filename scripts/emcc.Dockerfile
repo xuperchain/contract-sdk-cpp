@@ -1,4 +1,7 @@
-FROM golang:1.14 AS builder
+ARG BASE_IMAGE_GO=golang:1.14
+ARG BASE_IMAGE_UBUNTU=ubuntu:18.04
+
+FROM $BASE_IMAGE_GO AS builder
 RUN apt-get update && apt-get install git
 
 RUN git clone https://github.com/xuperchain/xdev.git /data/apps/xdev
@@ -6,8 +9,12 @@ WORKDIR /data/apps/xdev
 
 RUN make build
 
+
 # ---
-FROM ubuntu:18.04
+ARG BASE_IMAGE_GO=golang:1.14
+ARG BASE_IMAGE_UBUNTU=ubuntu:18.04
+
+FROM $BASE_IMAGE_UBUNTU
 SHELL ["/bin/bash", "-c"]
 
 
