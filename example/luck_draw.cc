@@ -2,7 +2,7 @@
 
 const std::string TICKETID = "Luckid_";
 const std::string USERID = "Userid_";
-const std::string ADMIN = "admin";
+const char* ADMIN = "admin";
 const std::string RESULT = "result";
 const std::string TICKETS = "tickets";
 
