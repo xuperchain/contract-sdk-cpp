@@ -1,10 +1,10 @@
 #include "xchain/xchain.h"
 
-const std::string TICKETID = "Luckid_";
-const std::string USERID = "Userid_";
+const char* TICKETID = "Luckid_";
+const char* USERID = "Userid_";
 const char* ADMIN = "admin";
-const std::string RESULT = "result";
-const std::string TICKETS = "tickets";
+const char* RESULT = "result";
+const char* TICKETS = "tickets";
 
 // 抽奖小游戏模板
 // 参数由xchain::Contract中的context提供
