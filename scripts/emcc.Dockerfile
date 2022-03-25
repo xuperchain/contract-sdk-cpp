@@ -54,7 +54,7 @@ COPY --from=builder /data/apps/xdev/bin/xdev bin/xdev
 COPY src src
 COPY xdev.toml xdev.toml
 
-RUN mkdir lib && XEDV_ROOT=`pwd` bin/xdev build -o lib/libxchain.a --compiler host --using-precompiled-sdk=false -s "xchain" -s "xchain/trust_operators"
+RUN mkdir lib && XEDV_ROOT=`pwd` bin/xdev build -o lib/libxchain.a --compiler host --using-precompiled-sdk=false -s "xchain" -s "xchain/trust_operators" -s "xchain/xrc01" -s "xchain/json" -s "xchain/table"
 
 
 COPY example example
