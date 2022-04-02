@@ -1,8 +1,8 @@
 #include "xchain/xchain.h"
 #include <string>
 
-const std::string UserBucket = "USER";
-const std::string HashBucket = "HASH";
+const char* UserBucket = "USER";
+const char* HashBucket = "HASH";
 
 // 文件Hash存证API规范
 // 参数由Context提供

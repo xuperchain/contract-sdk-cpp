@@ -7,10 +7,10 @@
 
 namespace xchain { namespace cdt {
 
-const std::string PREFIX_ROWKEY = "K";
-const std::string PREFIX_INDEX  = "I";
-const std::string PREFIX_INDEX_DEL  = "D";
-const std::string PREFIX_META  = "M";
+const char* PREFIX_ROWKEY = "K";
+const char* PREFIX_INDEX  = "I";
+const char* PREFIX_INDEX_DEL  = "D";
+const char* PREFIX_META  = "M";
 
 template<typename T>
 class TableIterator;
