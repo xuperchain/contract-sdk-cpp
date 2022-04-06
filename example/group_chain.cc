@@ -134,7 +134,7 @@ public:
             std::pair<std::string, std::string> res;
             iter->get(&res);
             std::string target = res.first;
-            int offset = nodeBucket.length() + 1;
+            int offset = strlen(nodeBucket) + 1;
             int length = target.length() - offset;
             result += target.substr(offset, length) + endingSeparator;
         }
