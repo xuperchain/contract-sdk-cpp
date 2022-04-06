@@ -1,9 +1,9 @@
 #include "xchain/xchain.h"
 
-const std::string nodeBucket = "NODE";
-const std::string chainBucket = "CHAIN";
+const char* nodeBucket = "NODE";
+const char* chainBucket = "CHAIN";
 
-const std::string endingSeparator = "\x01";
+const char* endingSeparator = "\x01";
 
 class GroupChainBasic {
 public:
@@ -134,7 +134,7 @@ public:
             std::pair<std::string, std::string> res;
             iter->get(&res);
             std::string target = res.first;
-            int offset = nodeBucket.length() + 1;
+            int offset = strlen(nodeBucket) + 1;
             int length = target.length() - offset;
             result += target.substr(offset, length) + endingSeparator;
         }

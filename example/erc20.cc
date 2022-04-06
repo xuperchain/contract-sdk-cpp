@@ -2,9 +2,9 @@
 
 struct ERC20 : public xchain::Contract {};
 
-const std::string BALANCEPRE = "balanceOf_";
-const std::string ALLOWANCEPRE = "allowanceOf_";
-const std::string MASTERPRE = "owner";
+const char* BALANCEPRE = "balanceOf_";
+const char* ALLOWANCEPRE = "allowanceOf_";
+const char* MASTERPRE = "owner";
 
 DEFINE_METHOD(ERC20, initialize) {
     xchain::Context* ctx = self.context();
