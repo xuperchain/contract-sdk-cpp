@@ -1,8 +1,8 @@
 #include "xchain/xchain.h"
 
-const std::string BALANCEPRE = "balanceOf_";
-const std::string ALLOWANCEPRE = "allowanceOf_";
-const std::string MASTERPRE = "owner";
+const char* BALANCEPRE = "balanceOf_";
+const char* ALLOWANCEPRE = "allowanceOf_";
+const char* MASTERPRE = "owner";
 
 // 积分管理合约的基类
 // 积分管理合约需要实现基类中指定的方法

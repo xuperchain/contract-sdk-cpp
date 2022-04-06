@@ -6,7 +6,7 @@
 
 struct Move : public xchain::Contract {};
 
-const std::string BALANCEPRE = "balanceOf_";
+const char* BALANCEPRE = "balanceOf_";
 
 enum ret_t {
     RET_SUCCESS = 0,  

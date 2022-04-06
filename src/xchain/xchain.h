@@ -18,7 +18,7 @@ struct Response {
     std::string body;
 };
 
-const std::string kUnknownKey = "";
+const char* kUnknownKey = "";
 
 class Context {
 public:
