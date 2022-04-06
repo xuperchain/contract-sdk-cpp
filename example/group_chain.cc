@@ -1,9 +1,9 @@
 #include "xchain/xchain.h"
 
-const std::string nodeBucket = "NODE";
-const std::string chainBucket = "CHAIN";
+const char* nodeBucket = "NODE";
+const char* chainBucket = "CHAIN";
 
-const std::string endingSeparator = "\x01";
+const char* endingSeparator = "\x01";
 
 class GroupChainBasic {
 public:
