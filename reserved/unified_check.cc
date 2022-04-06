@@ -21,12 +21,12 @@
 class UnifiedCheck : public xchain::Contract {};
 
 // define delimiters
-const std::string DELIMITER_COMMA = ",";  // used for dividing contract args
-const std::string DELIMITER_SLASH = "/";  // used for checking account/ak
+const char* DELIMITER_COMMA = ",";  // used for dividing contract args
+const char* DELIMITER_SLASH = "/";  // used for checking account/ak
 
 // prefix for different types
-const std::string PREFIX_IDENTITY = "ID_";
-const std::string PREFIX_BANNED_CONTRACT = "BAN_";
+const char* PREFIX_IDENTITY = "ID_";
+const char* PREFIX_BANNED_CONTRACT = "BAN_";
 
 // split_string split source string into string vector results using delimiter
 void string_split(const std::string& source, std::vector<std::string>& results,
