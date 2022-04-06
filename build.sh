@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e 
 
 cd `dirname $0`
 export PATH=`pwd`/../../../output/:$PATH
@@ -19,7 +20,7 @@ fi
 
 # build examples
 mkdir -p build
-for elem in `ls example`; do
+for elem in `ls example|grep -v data_auth|grep -v paillier|grep -v trustops|grep -v xrc01`; do
     cc=example/$elem
 
     # build single cc file
