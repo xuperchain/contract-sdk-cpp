@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+const char* kUnknownKey = "";
+
 namespace xchain {
 
 ContextImpl::ContextImpl() {}

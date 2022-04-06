@@ -31,8 +31,9 @@ public:
         std::string user_id = ctx->arg("user_id");
         std::string hash_id = ctx->arg("hash_id");
         std::string file_name = ctx->arg("file_name");
-        const std::string userKey = UserBucket + "/" + user_id + "/" + hash_id;
-        const std::string hashKey = HashBucket + "/" + hash_id;
+        const std::string userKey =
+            std::string(UserBucket) + "/" + user_id + "/" + hash_id;
+        const std::string hashKey = std::string(HashBucket) + "/" + hash_id;
         std::string value = user_id + "\t" + hash_id + "\t" + file_name;
         std::string tempVal;
         if (ctx->get_object(hashKey, &tempVal)) {
@@ -48,22 +49,22 @@ public:
     
     void queryUserList() {
         xchain::Context* ctx = this->context();
-        const std::string key = UserBucket + "/";
-        std::unique_ptr<xchain::Iterator> iter = ctx->new_iterator(key, key + "～");
+        const std::string key = std::string(UserBucket) + "/";
+        std::unique_ptr<xchain::Iterator> iter = ctx->new_iterator(key, key + "~");
         std::string result;
         while (iter->next()) {
             std::pair<std::string, std::string> res;
-            iter->get(&res);    
-            if (res.first.length() > UserBucket.length() + 1) {
-                result += res.first.substr(UserBucket.length() + 1) + "\n";
+            iter->get(&res);
+            if (res.first.length() > strlen(UserBucket) + 1) {
+                result += res.first.substr(strlen(UserBucket)+ 1) + "\n";
             }
         }
         ctx->ok(result);
     }
     void queryFileInfoByUser() {
         xchain::Context* ctx = this->context();
-        const std::string key = UserBucket + "/" + ctx->arg("user_id");
-        std::unique_ptr<xchain::Iterator> iter = ctx->new_iterator(key, key + "～");
+        const std::string key = std::string(UserBucket) + "/" + ctx->arg("user_id");
+        std::unique_ptr<xchain::Iterator> iter = ctx->new_iterator(key, key + "~");
         std::string result;
         while (iter->next()) {
             std::pair<std::string, std::string> res;
@@ -74,8 +75,8 @@ public:
     }
     void queryFileInfoByHash() {
         xchain::Context* ctx = this->context();
-        
-        const std::string key = HashBucket + "/" + ctx->arg("hash_id");
+
+        const std::string key = std::string(HashBucket) + "/" + ctx->arg("hash_id");
         std::string value;
         bool ret = ctx->get_object(key, &value);
         if (ret) {
