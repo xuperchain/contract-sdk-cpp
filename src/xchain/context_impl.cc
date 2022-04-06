@@ -6,6 +6,8 @@
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
 
+const char* kUnknownKey = "";
+
 namespace xchain {
 
 ContextImpl::ContextImpl() {}
