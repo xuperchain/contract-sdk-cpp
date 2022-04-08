@@ -152,3 +152,11 @@ DEFINE_METHOD(Features, direct_caller) {
     ctx->ok(ctx->caller());
     return;
 }
+
+//  undefined_behavior is a counterexample of cpp programing practice
+//  which may cause things out of exception 
+//  do not use it in your code
+DEFINE_METHOD(Features, undefined_behavior) {
+    int *a = 0, b;
+    b = *a;
+}

@@ -169,3 +169,8 @@ Test("caller", function (t) {
 }
 )
 
+
+Test("undefined_behavior", function (t) {
+    var c = deploy();
+    resp = c.Invoke("undefined_behavior", {});
+})
