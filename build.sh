@@ -2,8 +2,6 @@
 set -e 
 
 cd `dirname $0`
-export PATH=`pwd`/../../../output/:$PATH
-export XDEV_ROOT=`pwd`
 
 # install docker in precondition
 if ! command -v docker &>/dev/null; then
@@ -13,8 +11,7 @@ fi
 
 # check if xdev available
 if ! command -v xdev &>/dev/null; then
-    project_root=$(cd ../../.. && pwd)
-    echo "missing xdev command, please cd ${project_root} && make"
+    echo "missing xdev command, please install xdev first"
     exit 1
 fi
 
