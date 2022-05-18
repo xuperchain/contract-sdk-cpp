@@ -16,6 +16,14 @@ DEFINE_METHOD(SanitizerCase, undefined_behavior) {
     b = *a;
     ctx->ok("ok");
 }
+DEFINE_METHOD(SanitizerCase, double_delete) {
+    xchain::Context* ctx = self.context();
+     auto a  = new std::string();
+	delete(a);
+	delete(a);
+    ctx->ok("ok");
+}
+
 
 //  buffer_overflow is a counterexample of cpp programing practice
 //  which may cause things out of exception
