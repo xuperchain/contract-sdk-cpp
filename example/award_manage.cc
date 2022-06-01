@@ -192,7 +192,7 @@ public:
     }
     void transfer() {
         xchain::Context* ctx = this->context();
-        const std::string& from = ctx->arg("from");
+        const std::string& from = ctx->initiator());
         if (from.empty()) {
             ctx->error("missing from");
             return;
